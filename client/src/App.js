@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import Axios from "axios";
+import Header from "./components/Header";
 
 function App() {
   const [listOfUsers, setListOfUsers] = useState([]);
@@ -32,21 +33,12 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div className="usersDisplay">
-        {listOfUsers.map((user) => {
-          return (
-            <div>
-              <h1>Name: {user.name}</h1>
-              <h1>Age: {user.age}</h1>
-              <h1>Username: {user.username}</h1>
-            </div>
-          );
-        })}
-      </div>
-
-      <div>
+    <div>
+      <Header/>
+    <div className="App noSelect">
+    <div>
         <input
+          className='formContent'
           type="text"
           placeholder="Name..."
           onChange={(event) => {
@@ -54,6 +46,7 @@ function App() {
           }}
         />
         <input
+          className='formContent'
           type="number"
           placeholder="Age..."
           onChange={(event) => {
@@ -61,14 +54,28 @@ function App() {
           }}
         />
         <input
+          className='formContent'
           type="text"
           placeholder="Username..."
           onChange={(event) => {
             setUsername(event.target.value);
           }}
         />
-        <button onClick={createUser}> Create User </button>
+        <button className="btn btn-primary" onClick={createUser}> Create User </button>
       </div>
+
+      <div className="mainSection">
+        {listOfUsers.map((user) => {
+          return (
+            <div className="subSection">
+              <h3>Name: {user.name.toUpperCase()}</h3>
+              <h3>Age: {user.age}</h3>
+              <h4>Username: {user.username}</h4>
+            </div>
+          );
+        })}
+      </div>
+    </div>
     </div>
   );
 }
